@@ -139,7 +139,7 @@ func (p *glusterfsProvisioner) createVolume(
 
 	bricks, err = p.createBricks(namespace, name, cfg, gid)
 	if err != nil {
-		klog.Errorf("Creating bricks is failed: %s,%s", namespace, name)
+		klog.Errorf("Creating bricks has failed: %s,%s", namespace, name)
 	}
 
 	if err == nil {

@@ -90,7 +90,6 @@ func (p *glusterfsProvisioner) ExecuteCommand(
 
 func (p *glusterfsProvisioner) selectPod(host string,
 	config *ProvisionerConfig) (*v1.Pod, error) {
-
 	podList, err := p.client.CoreV1().
 		Pods(config.Namespace).
 		List(meta_v1.ListOptions{
@@ -105,7 +104,7 @@ func (p *glusterfsProvisioner) selectPod(host string,
 	}
 	for _, pod := range pods {
 		if pod.Status.PodIP == host {
-			klog.Infof("Pod selecterd: %v/%v\n", pod.Namespace, pod.Name)
+			klog.Infof("Pod selected: %v/%v\n", pod.Namespace, pod.Name)
 			return &pod, nil
 		}
 	}

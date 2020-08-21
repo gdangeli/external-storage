@@ -17,6 +17,7 @@ limitations under the License.
 package volume
 
 import (
+    "net"
 	"fmt"
 	"strings"
 )
@@ -92,7 +93,14 @@ func parseBrickRootPaths(param string) ([]BrickRootPath, error) {
 		if len(rawBrickPath) < 2 {
 			return nil, fmt.Errorf("BrickRootPath is invalid (format is `host:/path/to/root,host2:/path/to/root2`): %s", param)
 		}
-		brickRootPaths[i].Host = rawBrickPath[0]
+
+        addr, err := net.LookupIP( rawBrickPath[0] )
+        if err != nil {
+            brickRootPaths[i].Host = rawBrickPath[0];
+        } else {
+            brickRootPaths[i].Host = addr[0].String()
+        }
+
 		brickRootPaths[i].Path = rawBrickPath[1]
 	}
 
